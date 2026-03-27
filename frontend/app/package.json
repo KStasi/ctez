@@ -76,6 +76,9 @@
     "typescript": "^4.2.3",
     "web-vitals": "^1.1.1"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -102,5 +105,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "postcss-safe-parser": "4.0.2"
   }
 }

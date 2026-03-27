@@ -1,6 +1,6 @@
 import { Flex, Box, useColorMode, Text, useMediaQuery } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useLocation, matchPath } from 'react-router-dom';
+import { useLocation, matchPath, useHistory } from 'react-router-dom';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { ReactComponent as AllOvens } from '../../assets/images/sidebar/allovens.svg';
@@ -26,6 +26,7 @@ interface HeaderIconText {
 }
 
 const Header: React.FC<IHeaderProps> = ({ handleToggled, toggled }) => {
+  const history = useHistory();
   const [mobileScreen] = useMediaQuery(['(max-width: 600px)']);
   const { colorMode, toggleColorMode } = useColorMode();
   const [headerBackground, bannerbg, bannertext, trynow] = useThemeColors([
@@ -103,27 +104,15 @@ const Header: React.FC<IHeaderProps> = ({ handleToggled, toggled }) => {
       {isBannerOpen && (
         <Box width="100%" alignItems="center" className="banner" backgroundColor={bannerbg}>
           <Box className="bannermiddle">
-            <span className="banner-text" color={bannertext}>
-              {mobileScreen
-                ? 'Plenty V3 is live!'
-                : 'Plenty V3 is live!'}{' '}
-              <a
-                style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-                href="https://app.plenty.network/pools/v3"
-                target="_blank"
-                rel="noreferrer"
+            <div className="banner-text" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <span color={bannertext}>Ctez is sunsetting, please close your ovens.</span>
+              <Button
+                variant="outline"
+                onClick={() => history.push('/myovens')}
               >
-                <span className="trynow" color={trynow}>
-                  Try now
-                </span>{' '}
-{/* {!mobileScreen && (
-                  <span className="newBadge" color="#ffffff">
-                    New
-                  </span>
-                )}
-                {colorMode === 'light' ? <Arrow /> : <ArrowDark />} */}
-              </a>
-            </span>
+                My Ovens
+              </Button>
+            </div>
           </Box>
           <Box className="bannerright" style={{ cursor: 'pointer' }}>
             <span className="closeIconBanner">
